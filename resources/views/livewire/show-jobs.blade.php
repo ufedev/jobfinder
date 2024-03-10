@@ -16,7 +16,8 @@
 
                     <a href="#"
                         class='bg-emerald-600 font-medium p-2 rounded text-sm text-white text-center'>Candidatos</a>
-                    <a href="#" class='bg-sky-600 font-medium p-2 rounded text-sm text-white text-center'>Editar</a>
+                    <a href="{{ route('jobs.edit', ['job' => $job]) }}"
+                        class='bg-sky-600 font-medium p-2 rounded text-sm text-white text-center'>Editar</a>
                     <a href="#"
                         class='bg-red-600 font-medium p-2 rounded text-sm text-white text-center'>Eliminar</a>
 
