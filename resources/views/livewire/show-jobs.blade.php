@@ -6,7 +6,9 @@
             <div
                 class="bg-white dark:bg-gray-800 overflow-hidden border-b-[1px] border-slate-900 dark:border-slate-600 md:flex md:justify-between md:items-center">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h3 class='text-3xl font-medium mb-10'>{{ $job->title }}</h3>
+                    <a href="{{ route('jobs.show', ['job' => $job]) }}">
+                        <h3 class='text-3xl font-medium mb-10'>{{ $job->title }}</h3>
+                    </a>
                     <p>{{ $job->company }}</p>
 
                     <p>Ultimo día para inscribirse: {{ $job->last_day->format('d/m/Y') }}</p>

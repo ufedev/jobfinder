@@ -14,7 +14,7 @@ class JobsController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'verified']);
+        $this->middleware(['auth', 'verified'])->except('show');
     }
 
     public function index(): View
@@ -44,9 +44,14 @@ class JobsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Jobs $jobs)
+    public function show(Jobs $job): View
     {
         //
+        // dd($job);
+
+        return view('jobs.show', [
+            'job' => $job
+        ]);
     }
 
     /**

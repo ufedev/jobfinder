@@ -17,7 +17,6 @@ class ShowJobs extends Component
     public function delete($jobId)
     {
         Jobs::find($jobId)->delete();
-        return redirect()->route('jobs.index');
     }
 
 

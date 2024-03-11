@@ -31,5 +31,5 @@ Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.
 
 // JOBS EDIT
 Route::get("/jobs/{job}/edit", [JobsController::class, 'edit'])->name('jobs.edit');
-
+Route::get('/jobs/{job}', [JobsController::class, 'show'])->name('jobs.show');
 require __DIR__ . '/auth.php';
