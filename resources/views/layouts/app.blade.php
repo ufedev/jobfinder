@@ -15,6 +15,8 @@
         rel="stylesheet">
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @livewireStyles
 </head>
 
@@ -39,6 +41,7 @@
     </div>
 
     @livewireScripts
+    {{-- @stack('scripts') -- en caso que se use hojas externas, pero para livewire hay una forma mas facil con @script --}}
 </body>
 
 </html>

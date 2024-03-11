@@ -7,12 +7,13 @@
 
         @if (session()->has('message'))
             <p
-                class='text-sm p-2 my-3 rounded-lg text-white dark:text-white bg-gradient-to-tr from-green-700 to-emerald-600'>
+                class='text-sm p-2 my-3 border-2 border-green-900 font-bold text-black dark:text-black bg-gradient-to-tr from-green-200 to-emerald-100'>
                 {{ session('message') }}
             </p>
         @endif
     </x-slot>
 
     <livewire:show-jobs />
+
 
 </x-app-layout>

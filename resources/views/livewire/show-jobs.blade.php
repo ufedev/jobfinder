@@ -18,8 +18,8 @@
                         class='bg-emerald-600 font-medium p-2 rounded text-sm text-white text-center'>Candidatos</a>
                     <a href="{{ route('jobs.edit', ['job' => $job]) }}"
                         class='bg-sky-600 font-medium p-2 rounded text-sm text-white text-center'>Editar</a>
-                    <a href="#"
-                        class='bg-red-600 font-medium p-2 rounded text-sm text-white text-center'>Eliminar</a>
+                    <button wire:click="$dispatch('delete_alert', {'jobId': {{ $job->id }}} )"
+                        class='bg-red-600 font-medium p-2 rounded text-sm text-white text-center'>Eliminar</button>
 
                 </div>
             </div>
@@ -38,3 +38,34 @@
     </div>
 
 </div>
+@script
+    <script>
+        $wire.on('delete_alert', ({
+            jobId
+        }) => {
+            // console.log('hola')
+
+            Swal.fire({
+                title: "Seguro desea eliminar?",
+                text: "Una vez hecho el proceso es irreversible",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si, Eliminar",
+                cancelButtonText: "Cancelar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $wire.dispatch('delete_server', {
+                        jobId
+                    })
+                    Swal.fire({
+                        title: "Eliminado",
+                        text: "Esta vacante ha sido eliminada con éxito",
+                        icon: "success"
+                    });
+                }
+            });
+        })
+    </script>
+@endscript

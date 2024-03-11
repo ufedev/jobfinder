@@ -1,5 +1,6 @@
 {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
 <form class='w-full max-w-md flex flex-col gap-5' wire:submit.prevent="save">
+
     <div>
         <x-input-label for="titulo" :value="__('Titulo')" />
         <x-text-input id="titulo" class="block mt-1 w-full" type="text" wire:model.blur="titulo" :value="old('titulo')"
@@ -52,15 +53,20 @@
     </div>
     <div>
         <x-input-label for="imagen" :value="__('Imagen')" />
-        <x-text-input id="imagen" class="block mt-1 w-full" type="file" wire:model="imagen" autofocus
+        <x-text-input id="imagen" class="block mt-1 w-full" type="file" wire:model="nueva_imagen" autofocus
             accept="image/*" />
         <x-input-error :messages="$errors->get('imagen')" class="mt-2" />
     </div>
+
+
     <div class='my-5 w-60'>
-        @if ($imagen)
-            <img src="{{ $imagen->temporaryUrl() }}" />
+        @if ($nueva_imagen)
+            <img src="{{ $nueva_imagen->temporaryUrl() }}" />
+        @else
+            <img src="{{ asset('storage/jobs_image/' . $imagen) }}" alt="{{ __('Imagen de ' . $titulo) }}" />
         @endif
     </div>
+
 
     <x-primary-button class='mt-5'>
         Editar

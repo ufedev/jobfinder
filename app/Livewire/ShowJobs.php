@@ -4,11 +4,22 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Jobs;
+use Livewire\Attributes\On;
 
 class ShowJobs extends Component
 {
 
     // public $jobs = [];
+
+    // protected $listeners = ['prueba'];
+
+    #[On('delete_server')]
+    public function delete($jobId)
+    {
+        Jobs::find($jobId)->delete();
+        return redirect()->route('jobs.index');
+    }
+
 
     public function render()
     {

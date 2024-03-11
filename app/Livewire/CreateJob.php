@@ -6,7 +6,8 @@ use App\Models\Salary;
 use Livewire\Component;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
-use Livewire\Attribute\Validate;
+use Livewire\Attributes\Validate;
+// use Livewire\Attributes\On;
 use Livewire\WithFileUploads;
 use App\Models\Jobs;
 
