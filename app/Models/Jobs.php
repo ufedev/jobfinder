@@ -23,4 +23,13 @@ class Jobs extends Model
         'user_id',
         'published'
     ];
+
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'id', 'category_id');
+    }
+    public function salary()
+    {
+        return $this->hasOne(Salary::class, 'id', 'salary_id');
+    }
 }

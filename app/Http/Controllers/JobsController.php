@@ -20,6 +20,7 @@ class JobsController extends Controller
     public function index(): View
     {
         //
+        $this->authorize('viewAny', Jobs::class);
         return view('jobs.index');
     }
 
@@ -29,7 +30,7 @@ class JobsController extends Controller
     public function create(): View
     {
         //
-
+        $this->authorize('viewAny', Jobs::class);
         return view('jobs.create');
     }
 
@@ -60,6 +61,7 @@ class JobsController extends Controller
     public function edit(Jobs $job)
     {
         //
+        $this->authorize('viewAny', $job);
         $this->authorize('update', $job);
 
         return view('jobs.edit', ['job' => $job]);

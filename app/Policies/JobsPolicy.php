@@ -9,6 +9,13 @@ use Illuminate\Auth\Access\Response;
 class JobsPolicy
 {
 
+
+    public function viewAny(User $user): bool
+    {
+
+        return $user->rol === 2;
+    }
+
     public function update(User $user, Jobs $job): bool
     {
         //
