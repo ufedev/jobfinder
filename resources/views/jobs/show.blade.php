@@ -1,54 +1,61 @@
 <x-app-layout>
-
-    <x-slot name='header'>
+    <x-slot:header>
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __($job->title) }}
+            {{ __('Puesto ' . $job->title) }}
         </h2>
-    </x-slot>
+    </x-slot:header>
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100 flex flex-col justify-center items-center gap-10">
+                    <h3 class='text-3xl font-medium'>{{ $job->title }}</h3>
+                    <div class='flex flex-col md:flex-row gap-5 justify-between w-full items-center'>
+                        <div class="md:flex flex-col gap-1 w-full ">
+                            <p>Empresa: <span>{{ $job->company }}</span></p>
+                            <p>Disponible hasta: <span>{{ $job->last_day->format('d/m/Y') }}</span></p>
+                            <p>Creado: <span>{{ $job->created_at->diffForHumans() }}</span></p>
+                        </div>
+                        <div class='w-full md:text-right'>
+                            <p>Categoría: <span class='font-bold'>{{ $job->category->category }}</span></p>
+                            <p>Salario: <span class='font-bold'>{{ $job->salary->salary }}</span></p>
 
-    <section class='max-w-[60rem] bg-slate-300 dark:bg-gray-400 mx-auto mt-10 p-3 rounded'>
+                        </div>
 
-        <div class=" md:flex md:justify-between">
-            <div class='space-y-4'>
-                <h3 class='text-3xl font-medium'>{{ $job->title }}</h3>
-                <p class='text-sm font-medium text-slate-700 dark:text-slate-800'>Empresa:
-                    <span class='font-bold'>{{ $job->company }}</span>
-                </p>
-                <p class='text-sm font-medium text-slate-700 dark:text-slate-800'>Ultimo día para postularse:
-                    <span class='font-bold'>{{ $job->last_day->format('d-m-Y') }}</span>
-                </p>
-            </div>
 
-            <div class="mt-4 md:mt-0 space-y-4 flex flex-col items-start justify-end">
-                @auth
-                    <button
-                        class='font-medium text-start p-1 px-5 text-white dark:text-black w-full  bg-slate-900 dark:bg-slate-50 rounded-md'>Postularme</button>
-                @endauth
-                <p class='text-sm font-medium text-slate-700 dark:text-slate-800'>Categoria:
-                    <span class='font-bold'>{{ $job->category->category }}</span>
-                </p>
-                <p class='text-sm font-medium text-slate-700 dark:text-slate-800'>Salario:
-                    <span class='font-bold'>{{ $job->salary->salary }}</span>
-                </p>
-            </div>
-        </div>
-        <div class='mt-5 p-5 bg-slate-200 dark:bg-gray-800 text-black dark:text-white rounded'>
-            <h6 class='font-bold'>Descripción del puesto:</h6>
-            <div class='mt-5 flex flex-col items-center md:flex-row md:items-start gap-5'>
-                <div class='w-80'>
-                    <img src="{{ asset('storage/jobs_image/' . $job->image) }}" alt="Imagen de {{ $job->title }}">
+                    </div>
+                    <div class='grid md:grid-cols-2 w-full gap-5'>
+                        <img src="{{ asset('storage/jobs_image/' . $job->image) }}" alt="{{ $job->title }}"
+                            class='w-full aspect-square object-cover' />
+                        <div>
+                            <p class='font-bold'>Descripcion del puesto:</p>
+                            <p class='text-lg'>
+                                {{ $job->description }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <p class='text-nowrap'>{{ $job->description }}</p>
+                @auth
+                    @cannot('create', App\Models\Jobs::class)
+                        <livewire:apply-job :job="$job" />
+                    @endcannot
+                @endauth
+                @guest
+                    <div class='border-[1px] border-dotted border-black dark:border-slate-300 p-5 w-8/12 mx-auto my-5'>
+                        <p class='text-center text-black dark:text-slate-200'>
+                            <a href="{{ route('register') }}"
+                                class='font-bold text-indigo-600 dark;text-indigo-400'>Registrate</a> o <a
+                                href="{{ route('login') }}" class='font-bold text-indigo-600 dark;text-indigo-400'>Inicia
+                                Sesión</a> para poder postular
+                            a
+                            este trabajo.
+                        </p>
+                    </div>
+                @endguest
             </div>
+
+
         </div>
 
-        @guest
-            <div class="bg-slate-50 p-2 mt-2 border-2 border-dotted border-slate-900">
-                <p class="text-center font-bold">Desear aplicar a esta vacantel. <a class='text-blue-800'
-                        href={{ route('login') }}>Crea una cuenta
-                        y aplica a esta y otras
-                        vacantes</a></p>
-            </div>
-        @endguest
     </section>
+
 </x-app-layout>

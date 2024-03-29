@@ -11,6 +11,8 @@
 |
 */
 
+
+
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
@@ -41,6 +43,9 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+// $app->withMiddleware(function (Middleware $middleware) {
+//     $middleware->redirectGuestsTo("/mandioca");
+// });
 /*
 |--------------------------------------------------------------------------
 | Return The Application

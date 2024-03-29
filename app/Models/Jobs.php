@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Candidate;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Jobs extends Model
 {
@@ -31,5 +32,18 @@ class Jobs extends Model
     public function salary()
     {
         return $this->hasOne(Salary::class, 'id', 'salary_id');
+    }
+    public function candidates()
+    {
+        return $this->hasMany(Candidate::class, 'job_id', 'id')->orderBy('created_at', 'DESC');
+    }
+
+    public function recluiter()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    public function isApplied($id)
+    {
+        return $this->candidates->contains('candidate_id', $id);
     }
 }

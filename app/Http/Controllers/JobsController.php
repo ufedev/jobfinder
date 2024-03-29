@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jobs;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,8 @@ class JobsController extends Controller
     public function index(): View
     {
         //
-        $this->authorize('viewAny', Jobs::class);
+        // if (!auth()->user()) return redirect()->route('mandioca');
+        // $this->authorize('viewAny', Jobs::class);
         return view('jobs.index');
     }
 
@@ -30,7 +32,7 @@ class JobsController extends Controller
     public function create(): View
     {
         //
-        $this->authorize('viewAny', Jobs::class);
+        $this->authorize('create', Jobs::class);
         return view('jobs.create');
     }
 
@@ -61,7 +63,7 @@ class JobsController extends Controller
     public function edit(Jobs $job)
     {
         //
-        $this->authorize('viewAny', $job);
+        $this->authorize('viewAny', Jobs::class); // Se debe pasar el modelo sobre el cual va a bloquear el acceso en caso de no cumplirse
         $this->authorize('update', $job);
 
         return view('jobs.edit', ['job' => $job]);

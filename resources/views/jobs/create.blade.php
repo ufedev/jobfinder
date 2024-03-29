@@ -10,6 +10,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100 flex flex-col justify-center items-center gap-10">
                     <h3 class='text-3xl font-medium'>Crear Puesto</h3>
 
+
                     <livewire:create-job />
 
                 </div>

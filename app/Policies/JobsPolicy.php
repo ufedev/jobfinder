@@ -16,6 +16,11 @@ class JobsPolicy
         return $user->rol === 2;
     }
 
+    public function create(User $user)
+    {
+        return $user->rol === 2;
+    }
+
     public function update(User $user, Jobs $job): bool
     {
         //
@@ -30,5 +35,9 @@ class JobsPolicy
     {
         //
         return FALSE;
+    }
+    public function isRecluiter(User $user): bool
+    {
+        return $user->rol === 2;
     }
 }
